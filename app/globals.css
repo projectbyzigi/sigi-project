@@ -1,74 +1,224 @@
-:root {
-  --title: #111111;
-  --subtitle: #666666;
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  SIGI Bauunternehmen — Design Tokens                                */
+/*  Palette extracted from the Mallorca villa renders:                 */
+/*  warm stone white, off-white, charcoal, muted gold/sand accent.     */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-bg: #f5f1ea;        /* warm stone white (page background)   */
+  --color-surface: #fbf9f5;   /* off-white cards / sections          */
+  --color-ink: #1c1a16;       /* charcoal text                       */
+  --color-ink-soft: #4a443c;  /* secondary text                      */
+  --color-muted: #8a8175;     /* tertiary / captions                 */
+  --color-line: #e3dccf;      /* hairline borders                    */
+  --color-sand: #e9e0d2;      /* sand panels                         */
+  --color-gold: #b08d57;      /* muted gold accent                   */
+  --color-gold-soft: #c9ab7e; /* soft gold for hovers                */
+  --color-stone: #d8cdba;     /* natural stone                       */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 18px 50px -28px rgba(28, 26, 22, 0.45);
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.7) inset,
+    0 24px 60px -34px rgba(28, 26, 22, 0.4);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+/* Keep the reset in the base layer so Tailwind utility classes
+   (p-*, m-*, etc.) can still override it — an unlayered `*` reset
+   would otherwise win over the utilities layer and zero them out. */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  height: 100%;
-}
-
-body {
-  background: #ffffff;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Typography helpers                                                 */
+/* ------------------------------------------------------------------ */
+.display {
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-gold);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable surfaces                                                  */
+/* ------------------------------------------------------------------ */
+.glass {
+  background: rgba(251, 249, 245, 0.72);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+}
+
+.glass-dark {
+  background: rgba(20, 18, 15, 0.28);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+}
+
+.hairline {
+  border: 1px solid var(--color-line);
+}
+
+/* Primary / secondary buttons */
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 2rem;
-  text-align: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.9rem 1.6rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  will-change: transform;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+.btn-primary:hover {
+  background: var(--color-gold);
+}
+.btn-ghost {
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+}
+.btn-ghost:hover {
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+.btn-light {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-ink);
+}
+.btn-light:hover {
+  background: #fff;
+}
+.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.14);
 }
 
-.content {
-  max-width: 540px;
-  animation: fadeIn 1.6s ease both;
+/* Section rhythm */
+.section {
+  padding-block: clamp(5rem, 11vw, 9rem);
+}
+.container-x {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 3.5rem);
 }
 
-.brand {
-  font-size: clamp(3rem, 9vw, 5.5rem);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: var(--title);
-  margin-left: 0.18em; /* optical balance for tracking */
-  line-height: 1;
+/* Animated underline link */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-.headline {
-  margin-top: 2.25rem;
-  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: var(--title);
+/* Scroll prompt mouse dot */
+.scroll-dot {
+  animation: scrolldot 1.8s ease-in-out infinite;
 }
-
-.description {
-  margin-top: 1.5rem;
-  font-size: clamp(0.95rem, 2.5vw, 1.0625rem);
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--subtitle);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
+@keyframes scrolldot {
+  0% {
     transform: translateY(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(9px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
+/* ------------------------------------------------------------------ */
+/*  Reduced motion                                                     */
+/* ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
-  .content {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .scroll-dot {
     animation: none;
   }
 }
