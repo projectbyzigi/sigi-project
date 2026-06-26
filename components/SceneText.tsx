@@ -63,7 +63,7 @@ export default function SceneText({ scene, progress }: SceneTextProps) {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(18,16,13,0.60) 0%, rgba(18,16,13,0.28) 45%, rgba(18,16,13,0) 75%)",
+              "radial-gradient(ellipse at center, rgba(18,16,13,0.66) 0%, rgba(18,16,13,0.40) 44%, rgba(18,16,13,0) 78%)",
           }}
         />
       ) : (

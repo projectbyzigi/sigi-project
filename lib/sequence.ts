@@ -13,9 +13,9 @@
 /*  "held" beats can be injected without re-exporting anything:        */
 /*                                                                     */
 /*    progress 0.00 – 0.82  ->  villa frames 1 … 271  (deconstruction) */
-/*    progress 0.82 – 0.92  ->  architecture sketch   (held, turning   */
+/*    progress 0.82 – 0.95  ->  architecture sketch   (held, turning   */
 /*                                                      point)         */
-/*    progress 0.92 – 1.00  ->  finished villa frame 1 (held, for the  */
+/*    progress 0.95 – 1.00  ->  finished villa frame 1 (held, for the  */
 /*                                                      final headline) */
 /* ------------------------------------------------------------------ */
 
@@ -52,7 +52,7 @@ export const FRAME_MANIFEST: string[] = [
 /*  site-content.ts so visuals and copy stay in sync).                 */
 /* ------------------------------------------------------------------ */
 export const VILLA_PHASE_END = 0.82; // deconstruction finishes here
-export const SKETCH_PHASE_END = 0.92; // sketch is held until here
+export const SKETCH_PHASE_END = 0.95; // sketch is held until here (longer beat)
 
 function clamp01(v: number): number {
   return v < 0 ? 0 : v > 1 ? 1 : v;

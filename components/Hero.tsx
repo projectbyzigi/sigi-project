@@ -16,7 +16,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 flex justify-center md:mb-16"
+          className="mb-5 flex justify-center md:mb-7"
         >
           <Image
             src="/brand/logo-final.png"
@@ -57,13 +57,6 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Scroll prompt */}
-        <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-xs uppercase tracking-[0.32em] text-[var(--color-muted)] md:flex">
-          <span>{HERO.scrollPrompt}</span>
-          <span className="relative h-10 w-6 rounded-full border border-[var(--color-line)]">
-            <span className="scroll-dot absolute left-1/2 top-2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[var(--color-gold)]" />
-          </span>
-        </div>
       </div>
     </section>
   );

@@ -317,6 +317,17 @@ export default function ScrollSequenceCanvas() {
           <SceneText key={scene.id} scene={scene} progress={progress} />
         ))}
 
+        {/* Brand mark — held in the top-right corner for the whole story */}
+        <div className="pointer-events-none absolute right-5 top-20 z-20 md:right-8 md:top-24">
+          <Image
+            src="/brand/logo-final.png"
+            alt=""
+            width={200}
+            height={130}
+            className="h-auto w-[104px] opacity-90 drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] md:w-[136px]"
+          />
+        </div>
+
         {/* Subtle progress rail with chapter ticks */}
         <div className="pointer-events-none absolute right-5 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-2 md:flex">
           {SCENES.map((s) => {

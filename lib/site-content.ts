@@ -134,7 +134,7 @@ export const SCENES: Scene[] = [
   {
     id: "architecture",
     index: "08",
-    range: [0.82, 0.92],
+    range: [0.82, 0.95],
     title: "Planung & Architektur",
     headline: "Jedes erfolgreiche Projekt beginnt mit einer Idee.",
     bullets: [
@@ -149,7 +149,7 @@ export const SCENES: Scene[] = [
   {
     id: "all-in-one",
     index: "09",
-    range: [0.92, 1.0],
+    range: [0.95, 1.0],
     title: "Alles aus einer Hand",
     headline: "Von der ersten Skizze bis zur schlüsselfertigen Villa.",
     text: "Planung. Architektur. Möbel. Küchen. Innenausbau. Fassade. Rohbau. Fundamente. Alles aus einer Hand.",
@@ -292,7 +292,7 @@ export const ABOUT = {
   eyebrow: "Über uns",
   headline: "Ihr deutschsprachiges Bauunternehmen auf Mallorca.",
   body: "SIGI ist Ihr deutschsprachiges Bauunternehmen auf Mallorca für hochwertige Bauprojekte, Villen, Innenausbau und individuelle Lösungen.",
-  image: "/brand/team.jpg",
+  image: "/brand/team-photo.png",
   imageAlt: "Das Team von SIGI Bauunternehmen auf Mallorca",
   stats: [
     { value: "100%", label: "Aus einer Hand" },
