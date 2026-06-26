@@ -255,15 +255,16 @@ export const PROJECT_CATEGORIES: ("Alle" | ProjectCategory)[] = [
 
 export const PROJECTS: Project[] = [
   // New high-quality photos (2026) — featured first in their categories.
-  { src: "/images/K%C3%BCche/K%C3%BCche%20(1).png", alt: "Maßgefertigte Küche von SIGI auf Mallorca", category: "Küchen", span: "tall" },
-  { src: "/images/K%C3%BCche/K%C3%BCche%20(2).png", alt: "Moderne Einbauküche mit hochwertigen Oberflächen", category: "Küchen" },
-  { src: "/images/K%C3%BCche/K%C3%BCche%20(3).png", alt: "Küchendetail mit Naturstein und Holz", category: "Küchen" },
-  { src: "/images/Renovierung/Renovierung(1).png", alt: "Renovierungsprojekt auf Mallorca", category: "Renovierung", span: "wide" },
-  { src: "/images/Renovierung/Renovierung(2).png", alt: "Sanierung und Umbau eines Wohnraums", category: "Renovierung" },
-  { src: "/images/Renovierung/Renovierung(3).png", alt: "Renovierte Räume mit neuem Innenausbau", category: "Renovierung", span: "tall" },
-  { src: "/images/Pool/pool8.png", alt: "Hochwertige Poolanlage mit Außenbereich", category: "Pools", span: "wide" },
-  { src: "/images/Pool/pool9.png", alt: "Pool- und Wasserbereich einer Villa auf Mallorca", category: "Pools" },
-  { src: "/images/Roh%20bau/Roh%20bau2.png", alt: "Rohbau einer Villa auf Mallorca", category: "Rohbau", span: "tall" },
+  // Clean ASCII paths under /public/projects (no spaces/umlauts/brackets) for robust serving.
+  { src: "/projects/kuche-1.png", alt: "Maßgefertigte Küche von SIGI auf Mallorca", category: "Küchen", span: "tall" },
+  { src: "/projects/kuche-2.png", alt: "Moderne Einbauküche mit hochwertigen Oberflächen", category: "Küchen" },
+  { src: "/projects/kuche-3.png", alt: "Küchendetail mit Naturstein und Holz", category: "Küchen" },
+  { src: "/projects/renovierung-1.png", alt: "Renovierungsprojekt auf Mallorca", category: "Renovierung", span: "wide" },
+  { src: "/projects/renovierung-2.png", alt: "Sanierung und Umbau eines Wohnraums", category: "Renovierung" },
+  { src: "/projects/renovierung-3.png", alt: "Renovierte Räume mit neuem Innenausbau", category: "Renovierung", span: "tall" },
+  { src: "/projects/pool-8.png", alt: "Hochwertige Poolanlage mit Außenbereich", category: "Pools", span: "wide" },
+  { src: "/projects/pool-9.png", alt: "Pool- und Wasserbereich einer Villa auf Mallorca", category: "Pools" },
+  { src: "/projects/rohbau-2.png", alt: "Rohbau einer Villa auf Mallorca", category: "Rohbau", span: "tall" },
   { src: "/projects/interior-1.jpg", alt: "Innenausbau mit Holzelementen", category: "Innenausbau", span: "tall" },
   { src: "/projects/pool-1.jpg", alt: "Poolbereich einer Villa auf Mallorca", category: "Pools", span: "wide" },
   { src: "/projects/tiles-1.jpg", alt: "Großformatige Fliesenarbeiten", category: "Naturstein" },

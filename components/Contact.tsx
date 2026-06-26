@@ -3,15 +3,6 @@
 import { useState } from "react";
 import { CONTACT } from "@/lib/site-content";
 
-/**
- * Web3Forms access key — delivers submissions straight to CONTACT.email
- * (sigibau6@gmail.com), no backend required. Create a free key for that
- * inbox at https://web3forms.com and set NEXT_PUBLIC_WEB3FORMS_KEY in the
- * environment (e.g. .env.local), or paste it as the fallback below.
- */
-const WEB3FORMS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
-
 type Status = "idle" | "sending" | "sent" | "error";
 
 export default function Contact() {
@@ -21,25 +12,24 @@ export default function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const name = String(data.get("name") || "");
-    const projektart = String(data.get("projektart") || "");
-
-    data.append("access_key", WEB3FORMS_KEY);
-    data.append("from_name", "SIGI Website");
-    data.append(
-      "subject",
-      `Projektanfrage von ${name}${projektart ? ` – ${projektart}` : ""}`
-    );
+    const payload = {
+      name: String(data.get("name") || ""),
+      email: String(data.get("email") || ""),
+      phone: String(data.get("phone") || ""),
+      projektart: String(data.get("projektart") || ""),
+      message: String(data.get("message") || ""),
+    };
 
     setStatus("sending");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      // Sends server-side via our /api/contact route — no mail app, no mailto.
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      const json = await res.json();
-      if (json.success) {
+      const json = await res.json().catch(() => ({ success: false }));
+      if (res.ok && json.success) {
         setStatus("sent");
         form.reset();
       } else {
