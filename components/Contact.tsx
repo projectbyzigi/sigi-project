@@ -3,26 +3,51 @@
 import { useState } from "react";
 import { CONTACT } from "@/lib/site-content";
 
-export default function Contact() {
-  const [sent, setSent] = useState(false);
+/**
+ * Web3Forms access key — delivers submissions straight to CONTACT.email
+ * (sigibau6@gmail.com), no backend required. Create a free key for that
+ * inbox at https://web3forms.com and set NEXT_PUBLIC_WEB3FORMS_KEY in the
+ * environment (e.g. .env.local), or paste it as the fallback below.
+ */
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+type Status = "idle" | "sending" | "sent" | "error";
+
+export default function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
     const projektart = String(data.get("projektart") || "");
-    const message = String(data.get("message") || "");
-    // Privacy-friendly: no third-party submission — compose a local email.
-    const subject = encodeURIComponent(
+
+    data.append("access_key", WEB3FORMS_KEY);
+    data.append("from_name", "SIGI Website");
+    data.append(
+      "subject",
       `Projektanfrage von ${name}${projektart ? ` – ${projektart}` : ""}`
     );
-    const body = encodeURIComponent(
-      `${projektart ? `Projektart: ${projektart}\n\n` : ""}${message}\n\n${name}\n${email}`
-    );
-    window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      const json = await res.json();
+      if (json.success) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -77,47 +102,35 @@ export default function Contact() {
               <ContactBlock label="Inhaber">{CONTACT.owner}</ContactBlock>
               <ContactBlock label="NIF / CIF">{CONTACT.nif}</ContactBlock>
             </div>
+          </div>
 
-            {/* Location card — intentional, no broken embed */}
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                CONTACT.mapsQuery
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-5 rounded-2xl border border-[var(--color-line)] bg-white p-6 shadow-[0_16px_44px_-34px_rgba(28,26,22,0.4)] transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_28px_64px_-40px_rgba(28,26,22,0.5)]"
-            >
-              <span className="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[var(--color-sand)] text-[var(--color-gold)]">
+          {/* Form / success confirmation */}
+          {status === "sent" ? (
+            <div className="flex flex-col items-start justify-center rounded-3xl border border-[var(--color-line)] bg-white p-8 shadow-[0_30px_80px_-50px_rgba(28,26,22,0.55)] sm:p-10">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-sand)] text-[var(--color-gold)]">
                 <svg
-                  width="24"
-                  height="24"
+                  width="26"
+                  height="26"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden
                 >
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
+                  <path d="M20 6 9 17l-5-5" />
                 </svg>
               </span>
-              <span className="flex flex-col">
-                <span className="font-medium text-[var(--color-ink)]">
-                  {CONTACT.mapsLabel}
-                </span>
-                <span className="mt-0.5 text-sm text-[var(--color-ink-soft)]">
-                  Standort in Google Maps öffnen
-                  <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </span>
-              </span>
-            </a>
-          </div>
-
-          {/* Form */}
+              <h3 className="display mt-6 text-2xl text-[var(--color-ink)]">
+                Vielen Dank.
+              </h3>
+              <p className="mt-3 max-w-[40ch] text-[15px] leading-relaxed text-[var(--color-ink-soft)]">
+                Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns
+                schnellstmöglich bei Ihnen.
+              </p>
+            </div>
+          ) : (
           <form
             onSubmit={handleSubmit}
             className="rounded-3xl border border-[var(--color-line)] bg-white p-8 shadow-[0_30px_80px_-50px_rgba(28,26,22,0.55)] sm:p-10"
@@ -168,16 +181,28 @@ export default function Contact() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary mt-8 w-full">
-              {sent ? "E-Mail wird geöffnet …" : "Projekt besprechen"}
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="btn btn-primary mt-8 w-full disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {status === "sending" ? "Wird gesendet …" : "Anfrage senden"}
               <span aria-hidden>→</span>
             </button>
+
+            {status === "error" && (
+              <p className="mt-4 text-sm leading-relaxed text-red-600">
+                Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es
+                erneut oder schreiben Sie uns direkt an {CONTACT.email}.
+              </p>
+            )}
 
             <p className="mt-4 text-xs leading-relaxed text-[var(--color-muted)]">
               Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage
               verwendet und nicht an Dritte weitergegeben.
             </p>
           </form>
+          )}
         </div>
       </div>
     </section>

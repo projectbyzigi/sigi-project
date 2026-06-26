@@ -217,11 +217,6 @@ export const SERVICES: Service[] = [
     description:
       "Poolbau, Poolrenovierung, Terrassen, Natursteinmauern, Gartenbereiche und Außenanlagen.",
   },
-  {
-    title: "Immobilienvermittlung",
-    description:
-      "Unterstützung beim Kauf oder Verkauf ausgewählter Immobilien auf Mallorca – besonders bei Objekten mit Bau-, Renovierungs- oder Entwicklungspotenzial.",
-  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -259,6 +254,16 @@ export const PROJECT_CATEGORIES: ("Alle" | ProjectCategory)[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  // New high-quality photos (2026) — featured first in their categories.
+  { src: "/images/K%C3%BCche/K%C3%BCche%20(1).png", alt: "Maßgefertigte Küche von SIGI auf Mallorca", category: "Küchen", span: "tall" },
+  { src: "/images/K%C3%BCche/K%C3%BCche%20(2).png", alt: "Moderne Einbauküche mit hochwertigen Oberflächen", category: "Küchen" },
+  { src: "/images/K%C3%BCche/K%C3%BCche%20(3).png", alt: "Küchendetail mit Naturstein und Holz", category: "Küchen" },
+  { src: "/images/Renovierung/Renovierung(1).png", alt: "Renovierungsprojekt auf Mallorca", category: "Renovierung", span: "wide" },
+  { src: "/images/Renovierung/Renovierung(2).png", alt: "Sanierung und Umbau eines Wohnraums", category: "Renovierung" },
+  { src: "/images/Renovierung/Renovierung(3).png", alt: "Renovierte Räume mit neuem Innenausbau", category: "Renovierung", span: "tall" },
+  { src: "/images/Pool/pool8.png", alt: "Hochwertige Poolanlage mit Außenbereich", category: "Pools", span: "wide" },
+  { src: "/images/Pool/pool9.png", alt: "Pool- und Wasserbereich einer Villa auf Mallorca", category: "Pools" },
+  { src: "/images/Roh%20bau/Roh%20bau2.png", alt: "Rohbau einer Villa auf Mallorca", category: "Rohbau", span: "tall" },
   { src: "/projects/interior-1.jpg", alt: "Innenausbau mit Holzelementen", category: "Innenausbau", span: "tall" },
   { src: "/projects/pool-1.jpg", alt: "Poolbereich einer Villa auf Mallorca", category: "Pools", span: "wide" },
   { src: "/projects/tiles-1.jpg", alt: "Großformatige Fliesenarbeiten", category: "Naturstein" },
@@ -339,7 +344,7 @@ export const ABOUT = {
 /*  Contact + Impressum (from the original SIGI material)              */
 /* ------------------------------------------------------------------ */
 export const CONTACT = {
-  company: "Sigi-Bauunternehmen",
+  company: "SIGI-Bauunternehmen",
   owner: "Zbigniew Demczuk",
   address: {
     line1: "Calle Olivera 17",
@@ -347,10 +352,6 @@ export const CONTACT = {
     line3: "07181 Magaluf",
     line4: "Mallorca, Spain",
   },
-  /** Short label shown on the location button/card. */
-  mapsLabel: "Magaluf, Mallorca",
-  /** Full address used for every Google Maps link across the site. */
-  mapsQuery: "Calle Olivera 17, Bloque C Bajo B, 07181 Magaluf, Mallorca",
   nif: "X3242211-Q",
   phoneDisplay: "+34 617 693 880",
   phoneHref: "+34617693880",
