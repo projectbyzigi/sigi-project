@@ -34,6 +34,9 @@ export default function About() {
           <p className="mt-6 max-w-[50ch] text-lg font-light leading-relaxed text-[var(--color-ink-soft)]">
             {ABOUT.body}
           </p>
+          <p className="mt-4 max-w-[50ch] text-lg font-light leading-relaxed text-[var(--color-ink-soft)]">
+            {ABOUT.bodyExtra}
+          </p>
 
           <div className="mt-10 grid grid-cols-3 gap-6 border-t border-[var(--color-line)] pt-8">
             {ABOUT.stats.map((stat) => (

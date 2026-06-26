@@ -41,6 +41,7 @@ export default function Footer() {
             <span>{CONTACT.address.line1}</span>
             <span>{CONTACT.address.line2}</span>
             <span>{CONTACT.address.line3}</span>
+            <span>{CONTACT.address.line4}</span>
             <a
               href={`tel:${CONTACT.phoneHref}`}
               className="link-underline mt-2 w-fit text-[var(--color-ink)]"

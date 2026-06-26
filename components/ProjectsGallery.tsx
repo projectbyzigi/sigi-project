@@ -88,6 +88,12 @@ export default function ProjectsGallery() {
           </AnimatePresence>
         </motion.div>
 
+        {visible.length === 0 && (
+          <p className="mt-16 text-center text-[var(--color-ink-soft)]">
+            Projektfotos zu dieser Kategorie folgen in Kürze – gerne auf Anfrage.
+          </p>
+        )}
+
         <p className="mt-10 text-sm text-[var(--color-muted)]">
           {/* More project photos can be added in lib/site-content.ts → PROJECTS */}
           Weitere Projekte auf Anfrage.

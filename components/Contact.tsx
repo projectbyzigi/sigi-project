@@ -12,10 +12,15 @@ export default function Contact() {
     const data = new FormData(form);
     const name = String(data.get("name") || "");
     const email = String(data.get("email") || "");
+    const projektart = String(data.get("projektart") || "");
     const message = String(data.get("message") || "");
     // Privacy-friendly: no third-party submission — compose a local email.
-    const subject = encodeURIComponent(`Projektanfrage von ${name}`);
-    const body = encodeURIComponent(`${message}\n\n${name}\n${email}`);
+    const subject = encodeURIComponent(
+      `Projektanfrage von ${name}${projektart ? ` – ${projektart}` : ""}`
+    );
+    const body = encodeURIComponent(
+      `${projektart ? `Projektart: ${projektart}\n\n` : ""}${message}\n\n${name}\n${email}`
+    );
     window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
     setSent(true);
   };
@@ -46,6 +51,8 @@ export default function Contact() {
                 {CONTACT.address.line2}
                 <br />
                 {CONTACT.address.line3}
+                <br />
+                {CONTACT.address.line4}
               </ContactBlock>
 
               <ContactBlock label="Direkt">
@@ -74,7 +81,7 @@ export default function Contact() {
             {/* Location card — intentional, no broken embed */}
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `${CONTACT.address.line2}, ${CONTACT.address.line3}`
+                CONTACT.mapsQuery
               )}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -98,7 +105,7 @@ export default function Contact() {
               </span>
               <span className="flex flex-col">
                 <span className="font-medium text-[var(--color-ink)]">
-                  Son Servera, Mallorca
+                  {CONTACT.mapsLabel}
                 </span>
                 <span className="mt-0.5 text-sm text-[var(--color-ink-soft)]">
                   Standort in Google Maps öffnen
@@ -125,6 +132,27 @@ export default function Contact() {
                 required
               />
               <Field label="Telefon (optional)" name="phone" type="tel" autoComplete="tel" />
+              <div className="flex flex-col gap-2.5">
+                <label htmlFor="projektart" className="text-sm font-medium text-[var(--color-ink)]">
+                  Art des Projekts
+                </label>
+                <select
+                  id="projektart"
+                  name="projektart"
+                  defaultValue=""
+                  className="h-12 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 text-sm text-[var(--color-ink)] outline-none transition-colors focus:border-[var(--color-gold)] focus:bg-white"
+                >
+                  <option value="" disabled>
+                    Bitte wählen …
+                  </option>
+                  <option>Neubau / Villa</option>
+                  <option>Renovierung / Sanierung</option>
+                  <option>Pool / Außenanlage</option>
+                  <option>Immobilie kaufen</option>
+                  <option>Immobilie verkaufen</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
               <div className="flex flex-col gap-2.5">
                 <label htmlFor="message" className="text-sm font-medium text-[var(--color-ink)]">
                   Ihr Projekt

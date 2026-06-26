@@ -207,6 +207,21 @@ export const SERVICES: Service[] = [
     title: "Erdarbeiten & Fundamente",
     description: "Aushub, Fundamente und Baugrundvorbereitung.",
   },
+  {
+    title: "Renovierung & Sanierung",
+    description:
+      "Komplette Renovierungen, Umbauten und Sanierungen von Häusern, Villen, Wohnungen und Fincas auf Mallorca.",
+  },
+  {
+    title: "Pools & Außenanlagen",
+    description:
+      "Poolbau, Poolrenovierung, Terrassen, Natursteinmauern, Gartenbereiche und Außenanlagen.",
+  },
+  {
+    title: "Immobilienvermittlung",
+    description:
+      "Unterstützung beim Kauf oder Verkauf ausgewählter Immobilien auf Mallorca – besonders bei Objekten mit Bau-, Renovierungs- oder Entwicklungspotenzial.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -219,6 +234,8 @@ export type ProjectCategory =
   | "Küchen"
   | "Bäder"
   | "Rohbau"
+  | "Renovierung"
+  | "Pools"
   | "Außenbereiche";
 
 export interface Project {
@@ -236,12 +253,14 @@ export const PROJECT_CATEGORIES: ("Alle" | ProjectCategory)[] = [
   "Küchen",
   "Bäder",
   "Rohbau",
+  "Renovierung",
+  "Pools",
   "Außenbereiche",
 ];
 
 export const PROJECTS: Project[] = [
   { src: "/projects/interior-1.jpg", alt: "Innenausbau mit Holzelementen", category: "Innenausbau", span: "tall" },
-  { src: "/projects/pool-1.jpg", alt: "Poolbereich einer Villa auf Mallorca", category: "Außenbereiche", span: "wide" },
+  { src: "/projects/pool-1.jpg", alt: "Poolbereich einer Villa auf Mallorca", category: "Pools", span: "wide" },
   { src: "/projects/tiles-1.jpg", alt: "Großformatige Fliesenarbeiten", category: "Naturstein" },
   { src: "/projects/facade-1.jpg", alt: "Natursteinfassade einer Villa", category: "Außenbereiche" },
   { src: "/projects/interior-2.jpg", alt: "Maßgefertigter Innenausbau in Holz", category: "Innenausbau" },
@@ -250,22 +269,35 @@ export const PROJECTS: Project[] = [
   { src: "/projects/facade-2.jpg", alt: "Fassadendetail mit Naturstein", category: "Außenbereiche" },
   { src: "/projects/interior-3.jpg", alt: "Innenausbau mit Holzdekoration", category: "Innenausbau" },
   { src: "/projects/tiles-3.jpg", alt: "Badezimmer mit großformatigen Fliesen", category: "Bäder", span: "tall" },
-  { src: "/projects/pool-2.jpg", alt: "Außenbereich mit Pool", category: "Außenbereiche" },
+  { src: "/projects/pool-2.jpg", alt: "Außenbereich mit Pool", category: "Pools" },
   { src: "/projects/facade-3.jpg", alt: "Gebäudehülle und Fassade", category: "Außenbereiche" },
   { src: "/projects/interior-4.jpg", alt: "Wohnraum mit Holzakzenten", category: "Innenausbau", span: "wide" },
   { src: "/projects/tiles-4.jpg", alt: "Natursteinoberflächen im Detail", category: "Naturstein" },
-  { src: "/projects/pool-3.jpg", alt: "Terrasse und Poolanlage", category: "Außenbereiche" },
+  { src: "/projects/pool-3.jpg", alt: "Terrasse und Poolanlage", category: "Pools" },
   { src: "/projects/interior-5.jpg", alt: "Maßmöbel und Innenausbau", category: "Küchen" },
   { src: "/projects/facade-4.jpg", alt: "Fassade einer Mallorca-Villa", category: "Außenbereiche", span: "tall" },
   { src: "/projects/tiles-5.jpg", alt: "Premium-Fliesen im Bad", category: "Bäder" },
-  { src: "/projects/pool-4.jpg", alt: "Poolbereich mit Natursteinmauer", category: "Außenbereiche" },
+  { src: "/projects/pool-4.jpg", alt: "Poolbereich mit Natursteinmauer", category: "Pools" },
   { src: "/projects/interior-6.jpg", alt: "Innenausbau Detailaufnahme", category: "Innenausbau" },
-  { src: "/projects/pool-5.jpg", alt: "Gartenanlage mit Pool", category: "Außenbereiche", span: "wide" },
+  { src: "/projects/pool-5.jpg", alt: "Gartenanlage mit Pool", category: "Pools", span: "wide" },
   { src: "/projects/facade-5.jpg", alt: "Fassade und Außenwände", category: "Außenbereiche" },
-  { src: "/projects/pool-6.jpg", alt: "Außenanlage einer Villa", category: "Außenbereiche" },
+  { src: "/projects/pool-6.jpg", alt: "Außenanlage einer Villa", category: "Pools" },
   { src: "/projects/facade-6.jpg", alt: "Architektur und Fassadengestaltung", category: "Außenbereiche", span: "tall" },
-  { src: "/projects/pool-7.jpg", alt: "Pool und Terrassenbereich", category: "Außenbereiche" },
+  { src: "/projects/pool-7.jpg", alt: "Pool und Terrassenbereich", category: "Pools" },
 ];
+
+/* ------------------------------------------------------------------ */
+/*  Real estate / Immobilien block (between Leistungen and Projekte)   */
+/* ------------------------------------------------------------------ */
+export const REAL_ESTATE = {
+  eyebrow: "Immobilien",
+  title: "Immobilien mit Baupotenzial",
+  body: [
+    "Neben Bau- und Renovierungsprojekten unterstützen wir Kunden auch beim Kauf oder Verkauf ausgewählter Immobilien auf Mallorca. Durch unsere Erfahrung als Bauunternehmen können wir Zustand, Umbaupotenzial, Kosten und Machbarkeit realistisch einschätzen.",
+    "Ob Villa, Finca, Grundstück oder Renovierungsobjekt – wir begleiten Sie diskret und persönlich.",
+  ],
+  cta: { label: "Immobilienanfrage senden", href: "#kontakt" },
+};
 
 /* ------------------------------------------------------------------ */
 /*  Process / Ablauf                                                   */
@@ -292,6 +324,8 @@ export const ABOUT = {
   eyebrow: "Über uns",
   headline: "Ihr deutschsprachiges Bauunternehmen auf Mallorca.",
   body: "SIGI ist Ihr deutschsprachiges Bauunternehmen auf Mallorca für hochwertige Bauprojekte, Villen, Innenausbau und individuelle Lösungen.",
+  bodyExtra:
+    "Seit über 30 Jahren realisiert SIGI Bau- und Renovierungsprojekte auf Mallorca – deutschsprachig geführt, mit erfahrenem Team vor Ort.",
   image: "/brand/team-photo.png",
   imageAlt: "Das Team von SIGI Bauunternehmen auf Mallorca",
   stats: [
@@ -308,16 +342,21 @@ export const CONTACT = {
   company: "Sigi-Bauunternehmen",
   owner: "Zbigniew Demczuk",
   address: {
-    line1: "Apartamentos Es Pinaró Golf",
-    line2: "Carrer des Pinaro 2, No. 2-3G",
-    line3: "E-07559 Son Servera",
+    line1: "Calle Olivera 17",
+    line2: "Bloque C Bajo B",
+    line3: "07181 Magaluf",
+    line4: "Mallorca, Spain",
   },
-  nif: "X-3242211-Q",
-  phoneDisplay: "+34 617 603 880",
-  phoneHref: "+34617603880",
+  /** Short label shown on the location button/card. */
+  mapsLabel: "Magaluf, Mallorca",
+  /** Full address used for every Google Maps link across the site. */
+  mapsQuery: "Calle Olivera 17, Bloque C Bajo B, 07181 Magaluf, Mallorca",
+  nif: "X3242211-Q",
+  phoneDisplay: "+34 617 693 880",
+  phoneHref: "+34617693880",
   email: "sigibau6@gmail.com",
-  website: "www.sigi-bauunternehmen.de",
-  websiteHref: "https://www.sigi-bauunternehmen.de",
+  website: "sigi-project.com",
+  websiteHref: "https://sigi-project.com",
 };
 
 export const FOOTER = {

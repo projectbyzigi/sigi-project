@@ -13,11 +13,13 @@ export const metadata: Metadata = {
   title: "SIGI Bauunternehmen — Schlüsselfertige Villen auf Mallorca",
   description:
     "SIGI ist Ihr deutschsprachiges Bauunternehmen auf Mallorca. Von der Planung und Architektur bis zur schlüsselfertigen Villa — alles aus einer Hand.",
-  metadataBase: new URL("https://www.sigi-bauunternehmen.de"),
+  metadataBase: new URL("https://sigi-project.com"),
   openGraph: {
     title: "SIGI Bauunternehmen — Schlüsselfertige Villen auf Mallorca",
     description:
       "Von der ersten Skizze bis zur schlüsselfertigen Villa. Alles aus einer Hand.",
+    url: "https://sigi-project.com",
+    siteName: "SIGI Bauunternehmen",
     locale: "de_DE",
     type: "website",
   },

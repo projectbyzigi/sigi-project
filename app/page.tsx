@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ScrollSequenceCanvas from "@/components/ScrollSequenceCanvas";
 import Services from "@/components/Services";
+import RealEstate from "@/components/RealEstate";
 import ProjectsGallery from "@/components/ProjectsGallery";
 import Process from "@/components/Process";
 import About from "@/components/About";
@@ -21,6 +22,9 @@ export default function Home() {
 
         {/* 4 — Leistungen */}
         <Services />
+
+        {/* 4b — Immobilien mit Baupotenzial */}
+        <RealEstate />
 
         {/* 5 — Projekte / Realisierte Arbeiten */}
         <ProjectsGallery />
