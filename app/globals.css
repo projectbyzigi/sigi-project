@@ -6,7 +6,7 @@
 /*  warm stone white, off-white, charcoal, muted gold/sand accent.     */
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-bg: #f5f1ea;        /* warm stone white (page background)   */
+  --color-bg: #ffffff;        /* page background — matches the hero    */
   --color-surface: #fbf9f5;   /* off-white cards / sections          */
   --color-ink: #1c1a16;       /* charcoal text                       */
   --color-ink-soft: #4a443c;  /* secondary text                      */

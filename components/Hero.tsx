@@ -19,13 +19,13 @@ export default function Hero() {
           className="mb-5 flex justify-center md:mb-7"
         >
           <Image
-            src="/brand/logo-final.png"
+            src="/brand/logo-mark.png"
             alt="SIGI Bauunternehmen"
-            width={280}
-            height={180}
+            width={581}
+            height={486}
             priority
-            sizes="(min-width: 1024px) 360px, (min-width: 640px) 300px, 220px"
-            className="h-auto w-[220px] sm:w-[300px] lg:w-[360px]"
+            sizes="(min-width: 1024px) 145px, (min-width: 640px) 125px, 100px"
+            className="h-auto w-[100px] sm:w-[125px] lg:w-[145px]"
           />
         </motion.div>
 

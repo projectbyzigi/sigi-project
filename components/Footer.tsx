@@ -12,11 +12,11 @@ export default function Footer() {
               {FOOTER.tagline}
             </p>
             <Image
-              src="/brand/logo-final.png"
+              src="/brand/logo-mark.png"
               alt="SIGI Bauunternehmen"
-              width={280}
-              height={180}
-              className="mt-8 h-auto w-[220px]"
+              width={581}
+              height={486}
+              className="mt-8 h-auto w-[150px]"
             />
           </div>
 

@@ -38,13 +38,13 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           aria-label="Navigation"
         >
           <div className="container-x flex items-center justify-between py-5">
-            <div className="inline-flex items-center rounded-xl bg-white/90 px-2.5 py-1.5 shadow-[0_10px_28px_-18px_rgba(28,26,22,0.55)] ring-1 ring-black/5">
+            <div className="inline-flex items-center">
               <Image
-                src="/brand/logo-1.png"
-                alt="Project SIGI"
-                width={178}
-                height={120}
-                className="h-auto w-[64px]"
+                src="/brand/logo-mark.png"
+                alt="SIGI Bauunternehmen"
+                width={581}
+                height={486}
+                className="h-auto w-[76px]"
               />
             </div>
             <button

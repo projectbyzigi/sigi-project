@@ -9,7 +9,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 120);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -33,15 +33,20 @@ export default function Header() {
             Zur Startseite
           </a>
 
-          {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 md:flex">
+          {/* Desktop nav — revealed once the user starts scrolling */}
+          <nav
+            aria-hidden={!scrolled}
+            className={`hidden items-center gap-8 transition-all duration-300 md:flex ${
+              scrolled
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none -translate-y-1 opacity-0"
+            }`}
+          >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`link-underline text-sm font-medium tracking-wide transition-colors ${
-                  scrolled ? "text-[var(--color-ink)]" : "text-white"
-                }`}
+                className="link-underline text-sm font-medium tracking-wide text-[var(--color-ink)]"
               >
                 {link.label}
               </a>
@@ -66,16 +71,8 @@ export default function Header() {
             aria-label="Menü öffnen"
             className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           >
-            <span
-              className={`h-px w-6 transition-colors ${
-                scrolled ? "bg-[var(--color-ink)]" : "bg-white"
-              }`}
-            />
-            <span
-              className={`h-px w-6 transition-colors ${
-                scrolled ? "bg-[var(--color-ink)]" : "bg-white"
-              }`}
-            />
+            <span className="h-px w-6 bg-[var(--color-ink)]" />
+            <span className="h-px w-6 bg-[var(--color-ink)]" />
           </button>
         </div>
       </header>
