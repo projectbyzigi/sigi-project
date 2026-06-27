@@ -5,6 +5,10 @@ import { CONTACT } from "@/lib/site-content";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+// Web3Forms public Form Access Key — safe to expose in the browser.
+// Submissions are delivered to the verified recipient (sigibau6@gmail.com).
+const WEB3FORMS_ACCESS_KEY = "aa8572dd-f4f8-4f20-8817-f60ce5e3fcb3";
+
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -12,21 +16,29 @@ export default function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const payload = {
-      name: String(data.get("name") || ""),
-      email: String(data.get("email") || ""),
-      phone: String(data.get("phone") || ""),
-      projektart: String(data.get("projektart") || ""),
-      message: String(data.get("message") || ""),
-    };
+
+    const name = String(data.get("name") || "").trim();
+    const projektart = String(data.get("projektart") || "").trim();
+
+    // Web3Forms control fields. The access_key authorises delivery to the
+    // verified inbox; the rest shape the email that arrives.
+    data.set("access_key", WEB3FORMS_ACCESS_KEY);
+    data.set(
+      "subject",
+      `Projektanfrage von ${name || "Website"}${
+        projektart ? ` – ${projektart}` : ""
+      }`
+    );
+    data.set("from_name", "SIGI Website");
 
     setStatus("sending");
     try {
-      // Sends server-side via our /api/contact route — no mail app, no mailto.
-      const res = await fetch("/api/contact", {
+      // Standard Web3Forms submit endpoint — sends directly from the browser,
+      // works on Cloudflare Pages with no server route, no SMTP, no mailto.
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { Accept: "application/json" },
+        body: data,
       });
       const json = await res.json().catch(() => ({ success: false }));
       if (res.ok && json.success) {
@@ -125,6 +137,16 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="rounded-3xl border border-[var(--color-line)] bg-white p-8 shadow-[0_30px_80px_-50px_rgba(28,26,22,0.55)] sm:p-10"
           >
+            {/* Honeypot — hidden from users, catches spam bots (Web3Forms) */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden
+            />
+
             <div className="grid gap-6">
               <Field label="Name" name="name" autoComplete="name" required />
               <Field
